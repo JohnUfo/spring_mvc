@@ -45,6 +45,20 @@ public class ClubController {
         return "clubs-detail";
     }
 
+    @GetMapping("/clubs/{clubId}/edit")
+    public String editClubForm(@PathVariable("clubId") long clubId, Model model) {
+        clubService.findClubById(clubId);
+        model.addAttribute("club", clubService.findClubById(clubId));
+        return "clubs-edit";
+    }
+
+    @GetMapping("/clubs/{clubId}/delete")
+    public String deleteClub(@PathVariable("clubId") long clubId) {
+        clubService.delete(clubId);
+        return "redirect:/clubs";
+    }
+
+
     @PostMapping("/clubs/new")
     public String saveClub(@Valid @ModelAttribute("club") ClubDto clubDto,
                            BindingResult result,
@@ -55,13 +69,6 @@ public class ClubController {
         }
         clubService.saveClub(clubDto);
         return "redirect:/clubs";
-    }
-
-    @GetMapping("/clubs/{clubId}/edit")
-    public String editClubForm(@PathVariable("clubId") long clubId, Model model) {
-        clubService.findClubById(clubId);
-        model.addAttribute("club", clubService.findClubById(clubId));
-        return "clubs-edit";
     }
 
     @PostMapping("/clubs/{clubId}/edit")
