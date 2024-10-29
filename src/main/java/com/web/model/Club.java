@@ -1,8 +1,10 @@
 package com.web.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,14 +21,8 @@ public class Club {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotEmpty(message = "Club title should not be empty")
     private String title;
-
-    @NotEmpty(message = "Photo link should not be empty")
     private String photoUrl;
-
-    @NotEmpty(message = "Content should not be empty")
     private String content;
 
     @CreationTimestamp

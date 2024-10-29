@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,8 +40,12 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/new")
-    public String saveClub(@ModelAttribute("club") Club club) {
-        clubService.saveClub(club);
+    public String saveClub(@Valid @ModelAttribute("club") ClubDto clubDto,
+                           BindingResult result) {
+        if (result.hasErrors()) {
+            return "clubs-create";
+        }
+        clubService.saveClub(clubDto);
         return "redirect:/clubs";
     }
 
@@ -52,7 +57,12 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/{clubId}/edit")
-    public String editClub(@PathVariable("clubId") long clubId,@Valid  @ModelAttribute("club") ClubDto clubDto) {
+    public String editClub(@PathVariable("clubId") long clubId,
+                           @Valid @ModelAttribute("club") ClubDto clubDto,
+                           BindingResult result) {
+        if (result.hasErrors()) {
+            return "clubs-edit";
+        }
         clubDto.setId(clubId);
         clubService.editClub(clubDto);
         return "redirect:/clubs";
