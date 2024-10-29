@@ -3,6 +3,7 @@ package com.web.controller;
 import com.web.dto.ClubDto;
 import com.web.model.Club;
 import com.web.service.ClubService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,9 +17,9 @@ import java.util.List;
 @Controller
 public class ClubController {
 
+    @Autowired
     private ClubService clubService;
 
-    @Autowired
     public ClubController(ClubService clubService) {
         this.clubService = clubService;
     }
@@ -51,7 +52,7 @@ public class ClubController {
     }
 
     @PostMapping("/clubs/{clubId}/edit")
-    public String editClub(@PathVariable("clubId") long clubId, @ModelAttribute("club") ClubDto clubDto) {
+    public String editClub(@PathVariable("clubId") long clubId,@Valid  @ModelAttribute("club") ClubDto clubDto) {
         clubDto.setId(clubId);
         clubService.editClub(clubDto);
         return "redirect:/clubs";

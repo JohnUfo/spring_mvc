@@ -5,6 +5,7 @@ import com.web.dto.ClubDto;
 import com.web.model.Club;
 import com.web.repository.ClubRepository;
 import com.web.service.ClubService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class ClubsServiceImpl implements ClubService {
 
+    @Autowired
     private ClubRepository clubRepository;
 
     public ClubsServiceImpl(ClubRepository clubRepository) {
