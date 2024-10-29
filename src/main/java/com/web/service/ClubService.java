@@ -4,6 +4,7 @@ import com.web.dto.ClubDto;
 import com.web.model.Club;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public interface ClubService {
     List<ClubDto> findAllClubs();
@@ -15,4 +16,6 @@ public interface ClubService {
     void editClub(ClubDto clubDto);
 
     void delete(long clubId);
+
+    List<ClubDto> searchClubs(String query);
 }
