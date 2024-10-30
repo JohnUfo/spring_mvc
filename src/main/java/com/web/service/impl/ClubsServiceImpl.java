@@ -2,6 +2,7 @@ package com.web.service.impl;
 
 
 import com.web.dto.ClubDto;
+import com.web.mapper.ClubMapper;
 import com.web.model.Club;
 import com.web.repository.ClubRepository;
 import com.web.service.ClubService;
@@ -11,12 +12,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.web.mapper.ClubMapper.mapToClub;
+
 @Service
 public class ClubsServiceImpl implements ClubService {
 
-    @Autowired
     private ClubRepository clubRepository;
 
+    @Autowired
     public ClubsServiceImpl(ClubRepository clubRepository) {
         this.clubRepository = clubRepository;
     }
@@ -24,7 +27,7 @@ public class ClubsServiceImpl implements ClubService {
     @Override
     public List<ClubDto> findAllClubs() {
         List<Club> clubs = clubRepository.findAll();
-        return clubs.stream().map(this::mapToClubDto).collect(Collectors.toList());
+        return clubs.stream().map(ClubMapper::mapToClubDto).collect(Collectors.toList());
     }
 
     @Override
@@ -34,7 +37,7 @@ public class ClubsServiceImpl implements ClubService {
 
     @Override
     public ClubDto findClubById(long clubId) {
-        return clubRepository.findById(clubId).map(this::mapToClubDto).orElse(null);
+        return clubRepository.findById(clubId).map(ClubMapper::mapToClubDto).orElse(null);
     }
 
     @Override
@@ -50,28 +53,6 @@ public class ClubsServiceImpl implements ClubService {
 
     @Override
     public List<ClubDto> searchClubs(String query) {
-        return clubRepository.searchClubs(query).stream().map(this::mapToClubDto).toList();
-    }
-
-    private Club mapToClub(ClubDto club) {
-        return Club.builder()
-                .id(club.getId())
-                .title(club.getTitle())
-                .photoUrl(club.getPhotoUrl())
-                .content(club.getContent())
-                .createdOn(club.getCreatedOn())
-                .updatedOn(club.getUpdatedOn())
-                .build();
-    }
-
-    private ClubDto mapToClubDto(Club club) {
-        return ClubDto.builder()
-                .id(club.getId())
-                .title(club.getTitle())
-                .photoUrl(club.getPhotoUrl())
-                .content(club.getContent())
-                .CreatedOn(club.getCreatedOn())
-                .updatedOn(club.getUpdatedOn())
-                .build();
+        return clubRepository.searchClubs(query).stream().map(ClubMapper::mapToClubDto).toList();
     }
 }
