@@ -45,7 +45,6 @@ public class ClubController {
 
     @GetMapping("/clubs/{clubId}/edit")
     public String editClubForm(@PathVariable("clubId") long clubId, Model model) {
-        clubService.findClubById(clubId);
         model.addAttribute("club", clubService.findClubById(clubId));
         return "clubs-edit";
     }

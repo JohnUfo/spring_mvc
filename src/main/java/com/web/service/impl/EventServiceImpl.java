@@ -45,4 +45,14 @@ public class EventServiceImpl implements EventService {
     public EventDto findByEventId(Long eventId) {
         return eventRepository.findById(eventId).map(EventMapper::mapToEventDto).orElse(null);
     }
+
+    @Override
+    public void updateEvent(EventDto eventDto) {
+        eventRepository.save(mapToEvent(eventDto));
+    }
+
+    @Override
+    public void delete(long eventId) {
+        eventRepository.deleteById(eventId);
+    }
 }

@@ -3,7 +3,6 @@ package com.web.service.impl;
 
 import com.web.dto.ClubDto;
 import com.web.mapper.ClubMapper;
-import com.web.model.Club;
 import com.web.repository.ClubRepository;
 import com.web.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,7 @@ public class ClubsServiceImpl implements ClubService {
 
     @Override
     public List<ClubDto> findAllClubs() {
-        List<Club> clubs = clubRepository.findAll();
-        return clubs.stream().map(ClubMapper::mapToClubDto).collect(Collectors.toList());
+        return clubRepository.findAll().stream().map(ClubMapper::mapToClubDto).collect(Collectors.toList());
     }
 
     @Override
@@ -42,8 +40,7 @@ public class ClubsServiceImpl implements ClubService {
 
     @Override
     public void editClub(ClubDto clubDto) {
-        Club club = mapToClub(clubDto);
-        clubRepository.save(club);
+        clubRepository.save(mapToClub(clubDto));
     }
 
     @Override

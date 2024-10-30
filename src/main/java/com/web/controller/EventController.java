@@ -1,5 +1,6 @@
 package com.web.controller;
 
+import com.web.dto.ClubDto;
 import com.web.dto.EventDto;
 import com.web.model.Event;
 import com.web.service.EventService;
@@ -46,6 +47,18 @@ public class EventController {
         return "events-detail";
     }
 
+    @GetMapping("/events/{eventId}/edit")
+    public String editEventForm(@PathVariable("eventId") long eventId, Model model) {
+        model.addAttribute("event", eventService.findByEventId(eventId));
+        return "events-edit";
+    }
+
+    @GetMapping("/events/{eventId}/delete")
+    public String deleteClub(@PathVariable("eventId") long eventId) {
+        eventService.delete(eventId);
+        return "redirect:/events";
+    }
+
     @PostMapping("/events/{clubId}")
     public String createEventForm(@PathVariable("clubId") Long clubId,
                                   @Valid @ModelAttribute("event") EventDto eventDto,
@@ -60,5 +73,21 @@ public class EventController {
         return "redirect:/clubs/" + clubId;
     }
 
+    @PostMapping("/events/{eventId}/edit")
+    public String editClub(@PathVariable("eventId") long eventId,
+                           @Valid @ModelAttribute("event") EventDto editedEventDto,
+                           BindingResult result,
+                           Model model) {
+        if (result.hasErrors()) {
+            model.addAttribute("eventId", eventId);
+            model.addAttribute("event", editedEventDto);
+            return "events-edit";
+        }
+        EventDto eventDto = eventService.findByEventId(eventId);
+        editedEventDto.setId(eventId);
+        editedEventDto.setClub(eventDto.getClub());
+        eventService.updateEvent(editedEventDto);
+        return "redirect:/events";
+    }
 
 }
