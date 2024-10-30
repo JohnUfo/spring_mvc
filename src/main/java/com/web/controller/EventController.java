@@ -1,6 +1,5 @@
 package com.web.controller;
 
-import com.web.dto.ClubDto;
 import com.web.dto.EventDto;
 import com.web.model.Event;
 import com.web.service.EventService;
@@ -54,7 +53,7 @@ public class EventController {
     }
 
     @GetMapping("/events/{eventId}/delete")
-    public String deleteClub(@PathVariable("eventId") long eventId) {
+    public String deleteEvent(@PathVariable("eventId") long eventId) {
         eventService.delete(eventId);
         return "redirect:/events";
     }
@@ -74,10 +73,10 @@ public class EventController {
     }
 
     @PostMapping("/events/{eventId}/edit")
-    public String editClub(@PathVariable("eventId") long eventId,
-                           @Valid @ModelAttribute("event") EventDto editedEventDto,
-                           BindingResult result,
-                           Model model) {
+    public String editEvent(@PathVariable("eventId") long eventId,
+                            @Valid @ModelAttribute("event") EventDto editedEventDto,
+                            BindingResult result,
+                            Model model) {
         if (result.hasErrors()) {
             model.addAttribute("eventId", eventId);
             model.addAttribute("event", editedEventDto);
