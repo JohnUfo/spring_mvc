@@ -28,7 +28,7 @@ public class Club {
     private String content;
 
     @CreationTimestamp
-    private LocalDateTime CreatedOn;
+    private LocalDateTime createdOn;
 
     @UpdateTimestamp
     private LocalDateTime updatedOn;

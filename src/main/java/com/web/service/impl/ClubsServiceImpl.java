@@ -59,7 +59,7 @@ public class ClubsServiceImpl implements ClubService {
                 .title(club.getTitle())
                 .photoUrl(club.getPhotoUrl())
                 .content(club.getContent())
-                .CreatedOn(club.getCreatedOn())
+                .createdOn(club.getCreatedOn())
                 .updatedOn(club.getUpdatedOn())
                 .build();
     }
