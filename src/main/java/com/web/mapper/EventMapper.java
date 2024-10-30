@@ -6,6 +6,7 @@ import com.web.model.Event;
 public class EventMapper {
     public static Event mapToEvent(EventDto eventDto) {
         return Event.builder()
+                .id(eventDto.getId())
                 .name(eventDto.getName())
                 .startTime(eventDto.getStartTime())
                 .endTime(eventDto.getEndTime())
@@ -18,6 +19,7 @@ public class EventMapper {
 
     public static EventDto mapToEventDto(Event event) {
         return EventDto.builder()
+                .id(event.getId())
                 .name(event.getName())
                 .startTime(event.getStartTime())
                 .endTime(event.getEndTime())

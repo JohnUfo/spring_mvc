@@ -44,7 +44,7 @@
                                 <h2 class="card-title h4" th:text="${event.name}"></h2>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                     Reiciendis aliquid atque, nulla.</p>
-                                <a class="btn btn-primary" href="#!">Read more →</a>
+                                <a class="btn btn-primary" th:href="@{/events/{eventId}(eventId=${event.id})}">More</a>
                             </div>
                         </div>
                 <!-- Pagination-->
