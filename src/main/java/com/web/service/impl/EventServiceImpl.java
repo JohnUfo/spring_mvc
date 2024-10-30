@@ -2,6 +2,7 @@ package com.web.service.impl;
 
 
 import com.web.dto.EventDto;
+import com.web.mapper.EventMapper;
 import com.web.model.Club;
 import com.web.model.Event;
 import com.web.repository.ClubRepository;
@@ -9,6 +10,9 @@ import com.web.repository.EventRepository;
 import com.web.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.web.mapper.EventMapper.mapToEvent;
 
@@ -32,6 +36,10 @@ public class EventServiceImpl implements EventService {
         eventRepository.save(event);
     }
 
+    @Override
+    public List<EventDto> findAllEvents() {
+        return eventRepository.findAll().stream().map(EventMapper::mapToEventDto).collect(Collectors.toList());
+    }
 
 
 }
