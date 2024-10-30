@@ -1,5 +1,6 @@
 package com.web.dto;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,8 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EventDto {
     private Long id;
+
+    @NotEmpty(message = "Event name should not be empty")
     private String name;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
@@ -22,8 +25,12 @@ public class EventDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private LocalDateTime endTime;
 
+    @NotEmpty(message = "Event type should not be empty")
     private String type;
+
+    @NotEmpty(message = "Event photo Url should not be empty")
     private String photoUrl;
+
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class ClubController {
 
 
-    private ClubService clubService;
+    private final ClubService clubService;
 
     @Autowired
     public ClubController(ClubService clubService) {

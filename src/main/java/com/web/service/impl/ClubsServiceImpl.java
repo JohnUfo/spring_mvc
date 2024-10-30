@@ -28,8 +28,8 @@ public class ClubsServiceImpl implements ClubService {
     }
 
     @Override
-    public Club saveClub(ClubDto clubDto) {
-        return clubRepository.save(mapToClub(clubDto));
+    public void saveClub(ClubDto clubDto) {
+        clubRepository.save(mapToClub(clubDto));
     }
 
     @Override

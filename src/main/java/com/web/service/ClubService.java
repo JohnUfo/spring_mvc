@@ -4,12 +4,11 @@ import com.web.dto.ClubDto;
 import com.web.model.Club;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 public interface ClubService {
     List<ClubDto> findAllClubs();
 
-    Club saveClub(ClubDto clubDto);
+    void saveClub(ClubDto clubDto);
 
     ClubDto findClubById(long clubId);
 
