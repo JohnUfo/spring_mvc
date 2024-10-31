@@ -2,8 +2,11 @@ package com.web.service.impl;
 
 
 import com.web.dto.ClubDto;
+import com.web.entity.User;
 import com.web.mapper.ClubMapper;
 import com.web.repository.ClubRepository;
+import com.web.repository.UserRepository;
+import com.web.security.SecurityUtil;
 import com.web.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +20,12 @@ import static com.web.mapper.ClubMapper.mapToClub;
 public class ClubsServiceImpl implements ClubService {
 
     private ClubRepository clubRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public ClubsServiceImpl(ClubRepository clubRepository) {
+    public ClubsServiceImpl(ClubRepository clubRepository, UserRepository userRepository) {
         this.clubRepository = clubRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -30,6 +35,9 @@ public class ClubsServiceImpl implements ClubService {
 
     @Override
     public void saveClub(ClubDto clubDto) {
+        String username = SecurityUtil.getSessionUser();
+        User user = userRepository.findByUsername(username);
+        clubDto.setCreatedBy(user);
         clubRepository.save(mapToClub(clubDto));
     }
 
@@ -40,6 +48,9 @@ public class ClubsServiceImpl implements ClubService {
 
     @Override
     public void editClub(ClubDto clubDto) {
+        String username = SecurityUtil.getSessionUser();
+        User user = userRepository.findByUsername(username);
+        clubDto.setCreatedBy(user);
         clubRepository.save(mapToClub(clubDto));
     }
 
