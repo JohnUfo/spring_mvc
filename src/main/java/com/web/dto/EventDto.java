@@ -1,6 +1,6 @@
 package com.web.dto;
 
-import com.web.model.Club;
+import com.web.entity.Club;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

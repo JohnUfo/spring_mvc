@@ -1,6 +1,6 @@
 package com.web.repository;
 
-import com.web.model.Event;
+import com.web.entity.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

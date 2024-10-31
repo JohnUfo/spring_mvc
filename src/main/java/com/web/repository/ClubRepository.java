@@ -1,6 +1,6 @@
 package com.web.repository;
 
-import com.web.model.Club;
+import com.web.entity.Club;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

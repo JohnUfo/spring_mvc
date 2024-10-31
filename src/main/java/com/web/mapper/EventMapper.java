@@ -1,7 +1,7 @@
 package com.web.mapper;
 
 import com.web.dto.EventDto;
-import com.web.model.Event;
+import com.web.entity.Event;
 
 public class EventMapper {
     public static Event mapToEvent(EventDto eventDto) {

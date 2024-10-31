@@ -1,7 +1,7 @@
 package com.web.controller;
 
 import com.web.dto.EventDto;
-import com.web.model.Event;
+import com.web.entity.Event;
 import com.web.service.EventService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

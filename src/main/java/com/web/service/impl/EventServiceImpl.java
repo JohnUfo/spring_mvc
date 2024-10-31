@@ -3,8 +3,8 @@ package com.web.service.impl;
 
 import com.web.dto.EventDto;
 import com.web.mapper.EventMapper;
-import com.web.model.Club;
-import com.web.model.Event;
+import com.web.entity.Club;
+import com.web.entity.Event;
 import com.web.repository.ClubRepository;
 import com.web.repository.EventRepository;
 import com.web.service.EventService;

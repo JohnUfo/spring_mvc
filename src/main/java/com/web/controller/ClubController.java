@@ -1,7 +1,7 @@
 package com.web.controller;
 
 import com.web.dto.ClubDto;
-import com.web.model.Club;
+import com.web.entity.Club;
 import com.web.service.ClubService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

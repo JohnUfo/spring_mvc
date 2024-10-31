@@ -1,7 +1,7 @@
 package com.web.mapper;
 
 import com.web.dto.ClubDto;
-import com.web.model.Club;
+import com.web.entity.Club;
 
 import java.util.stream.Collectors;
 
