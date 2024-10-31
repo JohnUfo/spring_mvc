@@ -14,7 +14,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    private CustomUserDetailsService userDetailsService;
+
+    private final CustomUserDetailsService userDetailsService;
 
     @Autowired
     public SecurityConfig(CustomUserDetailsService userDetailsService) {
