@@ -24,8 +24,7 @@ public class AuthController {
 
     @GetMapping("/register")
     public String getRegisterForm(Model model) {
-        RegistrationDto user = new RegistrationDto();
-        model.addAttribute("user", user);
+        model.addAttribute("user", new RegistrationDto());
         return "register";
     }
 
@@ -36,12 +35,12 @@ public class AuthController {
 
         User existingUserEmail = userService.findByEmail(user.getEmail());
         if (existingUserEmail != null && existingUserEmail.getEmail() != null && !existingUserEmail.getEmail().isEmpty()) {
-            result.rejectValue("email", "There is already a user with this email/username");
+            return "redirect:/register?fail";
         }
 
         User existingUserUsername = userService.findByUsername(user.getUsername());
         if (existingUserUsername != null && existingUserUsername.getUsername() != null && !existingUserUsername.getUsername().isEmpty()) {
-            result.rejectValue("username", "There is already a user with this email/username");
+            return "redirect:/register?fail";
         }
 
         if (result.hasErrors()) {
@@ -51,5 +50,11 @@ public class AuthController {
 
         userService.saveUser(user);
         return "redirect:/clubs?success";
+    }
+
+    @GetMapping("/login")
+    public String getLoginForm(Model model) {
+        model.addAttribute("user", new RegistrationDto());
+        return "login";
     }
 }
