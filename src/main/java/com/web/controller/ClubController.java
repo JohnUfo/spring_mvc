@@ -3,6 +3,7 @@ package com.web.controller;
 import com.web.dto.ClubDto;
 import com.web.entity.Club;
 import com.web.service.ClubService;
+import com.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,16 +16,18 @@ import java.util.List;
 @Controller
 public class ClubController {
 
-
-    private final ClubService clubService;
+    private ClubService clubService;
+    private UserService userService;
 
     @Autowired
-    public ClubController(ClubService clubService) {
+    public ClubController(ClubService clubService, UserService userService) {
         this.clubService = clubService;
+        this.userService = userService;
     }
 
     @GetMapping("/clubs")
     public String listClubs(Model model) {
+        userService.userForFrontEnd(model);
         List<ClubDto> clubs = clubService.findAllClubs();
         model.addAttribute("clubs", clubs);
         return "clubs-list";
@@ -39,6 +42,7 @@ public class ClubController {
 
     @GetMapping("/clubs/{clubId}")
     public String clubDetail(@PathVariable("clubId") long clubId, Model model) {
+        userService.userForFrontEnd(model);
         model.addAttribute("club", clubService.findClubById(clubId));
         return "clubs-detail";
     }

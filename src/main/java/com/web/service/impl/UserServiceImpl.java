@@ -6,10 +6,12 @@ import com.web.entity.Role;
 import com.web.entity.User;
 import com.web.repository.RoleRepository;
 import com.web.repository.UserRepository;
+import com.web.security.SecurityUtil;
 import com.web.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.Collections;
 
@@ -46,5 +48,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public void userForFrontEnd(Model model) {
+        User user = new User();
+        String username = SecurityUtil.getSessionUser();
+        if (username != null) {
+            user = findByUsername(username);
+        }
+        model.addAttribute("user", user);
     }
 }

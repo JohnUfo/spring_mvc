@@ -3,6 +3,7 @@ package com.web.controller;
 import com.web.dto.EventDto;
 import com.web.entity.Event;
 import com.web.service.EventService;
+import com.web.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,22 +14,22 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-
 @Controller
 public class EventController {
 
-    private final EventService eventService;
+    private EventService eventService;
+    private UserService userService;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userService) {
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     @GetMapping("/events")
     public String eventList(Model model) {
-        List<EventDto> events= eventService.findAllEvents();
-        model.addAttribute("events", events);
+        userService.userForFrontEnd(model);
+        model.addAttribute("events", eventService.findAllEvents());
         return "events-list";
     }
 
@@ -42,12 +43,14 @@ public class EventController {
 
     @GetMapping("/events/{eventId}")
     public String viewEvent(@PathVariable("eventId") Long eventId, Model model) {
+        userService.userForFrontEnd(model);
         model.addAttribute("event", eventService.findByEventId(eventId));
         return "events-detail";
     }
 
     @GetMapping("/events/{eventId}/edit")
     public String editEventForm(@PathVariable("eventId") long eventId, Model model) {
+        userService.userForFrontEnd(model);
         model.addAttribute("event", eventService.findByEventId(eventId));
         return "events-edit";
     }
